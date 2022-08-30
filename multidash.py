@@ -34,7 +34,7 @@ def price_comparison():
     import pandas as pd
     import yfinance as yf
 
-    st.title('Stock Performace Dashboard')
+    st.title('Asset Performace Dashboard')
     
     st.write("Crude Oil:CL=F")                           
     st.write("Gold:GC=F")  
@@ -69,7 +69,22 @@ def asset_return():
    import yfinance as yf
    
    
+   tickers = ('TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK.B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
+   dropdown = st.multiselect('Select your assests', tickers)
 
+   start = st.date_input('Start', value = pd.to_datetime('1970-01-01'))
+   end = st.date_input('End',value = pd.to_datetime('today'))
+
+def relativeret(df):
+    rel = df.pct_change()
+    cumret = (1+rel).cumprod() - 1
+    cumret = cumret.filna(0)
+    return cumret
+
+     if len (dropdown) > 0:
+         df = yf.download(dropdown,start,end)['Adj Close']
+         st.line_chart(df)
+         
 def data_frame_demo():
     import streamlit as st
     import pandas as pd
