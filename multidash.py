@@ -3,21 +3,21 @@ import streamlit as st
 def intro():
     import streamlit as st
 
-    st.write("# Welcome to AplhaLight! ")
-    st.sidebar.success("Select a demo above.")
+    st.write("# Welcome to AssessAlpha! ")
+    st.sidebar.success("Select an Analyzer above.")
 
     st.markdown(
         """
-        AlphaLight is an open-source app framework built specifically for
+        AssessAlpha is an open-source app framework built specifically for
         Machine Learning and Data Science projects.
 
         Select a dashboard from the dropdown on the left to anaylzy equities, bonds, commodities, currincies, cryptos see some examples
-        of what AlphaLight can do!
+        of what AssessAlpha can do!
 
         ### Want to learn more?
 
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
+        - Check out the repo [here](https://github.com/webn3ewbie/Equity-Currencies-Cryptos-Bonds-Analyzer)
+        - Connect with me on [LinkedIn](https://www.linkedin.com/in/joseph-biancamano/)
         - Ask a question in our [community
           forums](https://discuss.streamlit.io)
 
@@ -33,60 +33,76 @@ def price_comparison():
     import streamlit as st
     import pandas as pd
     import yfinance as yf
-
-    st.title('Asset Performace Dashboard')
     
-    st.write("Crude Oil:CL=F")                           
-    st.write("Gold:GC=F")  
-    st.write("Silver:SI=F")
-    st.write("U.S. 5 Year Treasury Yield:^FVX")
-    st.write("U.S. 10 Year Treasury Yield:^TXN")
-    st.write("U.S. 30 Year Treasury Yield:^TYX")
-    st.write("EUR/USD:EURUSD=X")
-    st.write("Dow Jones Industrial Average:^DJI")
-    st.write("S&P 500:^GSPC")
-    st.write("Nasdaq:^IXIC")
+   
+    st.title('Asset Price Analyzer')
     
-      
-      
-
+    st.write("""
+             Crude Oil: CL=F 
+             
+             Gold: GC=F 
+             
+             Silver: SI=F  
+             
+             U.S. 5 Year Treasury Yield: ^FVX
+             
+             U.S. 10 Year Treasury Yield: ^TXN
+             
+             U.S. 30 Year Treasury Yield: ^TYX
+             
+             Dow Jones Industrial Average: ^DJI
+             
+             S&P 500: ^GSPC
+             
+             Nasdaq: ^IXIC
+             
+             """)
+   
     tickers = ('TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK.B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
 
     dropdown = st.multiselect('Select your assests', tickers)
 
-    start = st.date_input('Start', value = pd.to_datetime('1970-01-01'))
+    start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
     end = st.date_input('End',value = pd.to_datetime('today'))
 
     if len (dropdown) > 0:
         df = yf.download(dropdown,start,end)['Adj Close']
+        st.header('Prices of {}'.format(dropdown))
         st.line_chart(df)
 
 
 def asset_return():
-   import streamlit as st
-   import pandas as pd
-   import numpy as np
-   import yfinance as yf
-   
-   
-   tickers = ('TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK.B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
-   dropdown = st.multiselect('Select your assests', tickers)
 
-   start = st.date_input('Start', value = pd.to_datetime('1970-01-01'))
-   end = st.date_input('End',value = pd.to_datetime('today'))
+    
+    import pandas as pd
+    import yfinance as yf
+ 
+    st.title('Asset Return Analyzer')
+ 
+    tickers = ('TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK.B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
+ 
+    dropdown = st.multiselect('Select your assests', tickers)
+ 
+    start = st.date_input('Start', value = pd.to_datetime('2010-01-01'))
+    end = st.date_input('End',value = pd.to_datetime('today'))
 
-def relativeret(df):
-    rel = df.pct_change()
-    cumret = (1+rel).cumprod() - 1
-    cumret = cumret.filna(0)
-    return cumret
+    def relativeret(df):
+        rel = df.pct_change()
+        cumret = (1+rel).cumprod() - 1
+        cumret = cumret.fillna(0)
+        return cumret
 
-     if len (dropdown) > 0:
-         df = yf.download(dropdown,start,end)['Adj Close']
-         st.line_chart(df)
-         
-def data_frame_demo():
-    import streamlit as st
+    if len (dropdown) > 0:
+       df = relativeret(yf.download(dropdown,start,end)['Adj Close'])
+       st.header('Returns of {}'.format(dropdown))
+       st.line_chart(df)
+       
+      
+
+          
+def asset_price_prediction():
+    
+    
     import pandas as pd
     import numpy as np
     import yfinance as yf
@@ -95,7 +111,7 @@ page_names_to_funcs = {
     "Home": intro,
     "Asset Return Comparison": asset_return,
     "Asset Price Comparison": price_comparison,
-    "DataFrame Demo": data_frame_demo
+    "Assest Price Prediction": asset_price_prediction
 }
 
 demo_name = st.sidebar.selectbox("Choose a dashboard", page_names_to_funcs.keys())
