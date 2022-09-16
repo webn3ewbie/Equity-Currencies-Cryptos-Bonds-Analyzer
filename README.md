@@ -1,4 +1,4 @@
-<h1> <b> STREAMLIT STOCK PREDICT APP  </h1>
+<h1> <b> STREAMLIT ASSET ANALYSIS/PREDICTION APP  </h1>
 Analyze equities, bonds, commodities, currencies, cryptos and predict asset prices using Streamlit and Facebook Prophet
 
 <h2><b> OVERVIEW </b> </h2>
