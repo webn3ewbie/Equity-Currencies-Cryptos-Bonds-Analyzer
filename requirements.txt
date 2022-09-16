@@ -3,3 +3,4 @@ streamlit
 prophet
 numpy
 seaborn
+plotly==3.10.0
