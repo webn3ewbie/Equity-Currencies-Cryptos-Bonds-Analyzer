@@ -10,17 +10,15 @@ def intro():
 
     st.markdown(
         """
-        ExtractAlpha is an open-source Streamlit app built specifically to analyze equities, bonds, commodities, currencies, and cryptos. ExtractAplha supports any asset availible on YahooFinance.com
+        ExtractAlpha is an open-source Streamlit app built specifically to analyze equities, bonds, commodities, currencies, and cryptos. ExtractAlpha supports any asset available on YahooFinance.com
 
-        Select a dashboard from the dropdown on the left to analyze equities, bonds, commodities, currencies, cryptos see some examples
-        of what ExtractAlpha can do!
+        ExtractAlpha consists of multiple unique dashboards that feature Asset Returns, Asset Price Comparisons, and Asset Price Predictions. Choose a dashboard and see what ExtractAlpha can do!
 
         ### Want to learn more?
 
-        - Check out the repo [here](https://github.com/webn3ewbie/Equity-Currencies-Cryptos-Bonds-Analyzer)
+        - Check out the repo [Here](https://github.com/webn3ewbie/Equity-Currencies-Cryptos-Bonds-Analyzer)
         - Connect with me on [LinkedIn](https://www.linkedin.com/in/joseph-biancamano/)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
+        - Ask a question in the Streamlit community [forums](https://discuss.streamlit.io)
 
         ### See more complex demos
 
@@ -105,7 +103,8 @@ def asset_price_prediction():
 
     st.title('Stock Forecast App')
 
-    stocks = ('GOOG', 'AAPL', 'MSFT', 'GME','SPY','MSTR','QQQ','^GSPC','META','CL=F')
+    stocks = ('TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
+
     selected_stock = st.selectbox('Select dataset for prediction', stocks)
 
     n_years = st.slider('Years of prediction:', 1, 5)
@@ -168,5 +167,4 @@ page_names_to_funcs = {
 demo_name = st.sidebar.selectbox("Choose a dashboard", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
 
-ose a dashboard", page_names_to_funcs.keys())
-page_names_to_funcs[demo_name]()
+
