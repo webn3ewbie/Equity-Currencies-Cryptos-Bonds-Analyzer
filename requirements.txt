@@ -2,4 +2,4 @@ pandas
 streamlit
 prophet
 numpy
-ploty
+seaborn
