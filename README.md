@@ -1,5 +1,5 @@
 <h1> <b> STREAMLIT STOCK PREDICT APP  </h1>
-Analyze equities, bonds, commodities, currencies,cryptos and predict asset prices using Streamlit and Facebook Prophet
+Analyze equities, bonds, commodities, currencies, cryptos and predict asset prices using Streamlit and Facebook Prophet
 
 <h2><b> OVERVIEW </b> </h2>
  ExtractAlpha is an app that levrages Streamlit to analyze equities, bonds, commodities, currencies, and cryptos. ExtractAlpha supports any asset available on YahooFinance.com.<br> <b>The Asset Prediction is done using FaceBook's Prophet and the web appplication has been created using Streamlit.
