@@ -14,6 +14,7 @@ Analyze stocks, bonds, commodities, currencies, cryptos and predict asset prices
 <h2><b> FUTURE FEATURES-(TBD) </h2>
  <ul style="FUTURE Features:square;">
   <li>Addition of Assest Fundemental Analysis </li>
+  <li>Addition of Technical Analysis scanner </li>
   <li>Inclusion of alternative data, including a live newsfeed </li>
 </ul>
 
@@ -22,6 +23,6 @@ Analyze stocks, bonds, commodities, currencies, cryptos and predict asset prices
 
 <h3> App link: https://webn3ewbie-financial-asset-analysis-app-multidash-rwni5g.streamlitapp.com/ </h3>
 
-<h3> FB Prophet Docs: https://facebook.github.io/prophet/docs/quick_start.html </h3>
+<h3> Facebook Prophet Docs: https://facebook.github.io/prophet/docs/quick_start.html </h3>
 
 <h3> Streamlit : https://www.streamlit.io/ </h3>
