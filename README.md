@@ -20,7 +20,7 @@ Analyze stocks, bonds, commodities, currencies, cryptos and predict asset prices
 <br>
 
 
-<h3> App link: https://stock-predict-app.11 </h3>
+<h3> App link: https://webn3ewbie-financial-asset-analysis-app-multidash-rwni5g.streamlitapp.com/ </h3>
 
 <h3> FB Prophet Docs: https://facebook.github.io/prophet/docs/quick_start.html </h3>
 
