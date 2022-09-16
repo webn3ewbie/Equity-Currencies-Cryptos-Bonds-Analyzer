@@ -1,7 +1,7 @@
 [theme]
 base="dark"
-Primary color="#000000"
-Background color="#000000"
-Text color="#FAFAFA"
-Secondary background color="#F70606"
+primary color="#000000"
+ackground color="#000000"
+text color="#FAFAFA"
+secondary background color="#F70606"
 
