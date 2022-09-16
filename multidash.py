@@ -10,9 +10,9 @@ def intro():
 
     st.markdown(
         """
-        ExtractAlpha is an open-source app framework built specifically to anaylzy equities, bonds, commodities, currencies, cryptos
+        ExtractAlpha is an open-source app framework built specifically to analyze equities, bonds, commodities, currencies, cryptos
 
-        Select a dashboard from the dropdown on the left to anaylzy equities, bonds, commodities, currencies, cryptos see some examples
+        Select a dashboard from the dropdown on the left to analyze equities, bonds, commodities, currencies, cryptos see some examples
         of what ExtractAlpha can do!
 
         ### Want to learn more?
