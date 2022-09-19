@@ -5,3 +5,4 @@ numpy
 seaborn
 plotly==3.10.0
 yfinance
+pandas_datareader
