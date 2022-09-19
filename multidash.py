@@ -11,7 +11,7 @@ def intro():
         ExtractAlpha is an open-source Streamlit app built specifically to analyze equities, bonds, commodities, currencies, and cryptos. ExtractAlpha supports any asset available on YahooFinance.com
         
        
-        ExtractAlpha consists of multiple unique dashboards that feature Asset Returns, Asset Price Comparisons, Asset Price Predictions, and Monte Carlo Simulation. The Asset Price Prediction leverages Facebook Prophet to predict prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user .Please note this app is NOT financial advice,  nor are any dashboards intended to help guide financial decisions!
+        ExtractAlpha consists of multiple unique dashboards that feature Asset Returns, Asset Price Comparisons, Asset Price Predictions, Monte Carlo Simulation, and Equity Fundamental Analysis, which includes Quarterly financials,Quarterly balance sheet, Institutional Shareholder filings. The Asset Price Prediction leverages Facebook Prophet to predict prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user .Please note this app is NOT financial advice,  nor are any dashboards intended to help guide financial decisions!
 
         A big shoutout to [Algovibes](https://www.youtube.com/c/Algovibes/featured) and [Python Engineer](https://www.youtube.com/c/PythonEngineer). Without their videos and blog posts this project would not have be been possible, much apperciate the inspiration. Make sure you check out their excellent content!
         
