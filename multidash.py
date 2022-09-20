@@ -283,7 +283,7 @@ def equity_analysis():
 
 
  #ticker search feature in sidebar
- st.title("""Stock Search Web App""")
+ st.title("""Equity Fundamental Analysis""")
  selected_stock = st.text_input("Enter a valid stock ticker...", "GOOG")
 
 
