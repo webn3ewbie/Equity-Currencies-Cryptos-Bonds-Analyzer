@@ -11,11 +11,10 @@ def intro():
         ExtractAlpha is an open-source Streamlit app built specifically to analyze equities, bonds, commodities, currencies, and cryptos. ExtractAlpha supports any asset available on YahooFinance.com
         
        
-        ExtractAlpha consists of multiple unique dashboards that feature Asset Returns, Asset Price Comparisons, Asset Price Predictions, and Monte Carlo Simulation. The Asset Price Prediction leverages Facebook Prophet to predict prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user .Please note this app is NOT financial advice,  nor are any dashboards intended to help guide financial decisions!
-
-        A big shoutout to [Algovibes](https://www.youtube.com/c/Algovibes/featured) and [Python Engineer](https://www.youtube.com/c/PythonEngineer). Without their videos and blog posts this project would not have be been possible, much apperciate the inspiration. Make sure you check out their excellent content!
+        ExtractAlpha consists of multiple unique dashboards that feature Asset Returns, Asset Price Comparisons, Asset Price Predictions, Monte Carlo Simulation, and Equity Fundamental Analysis. The Asset Price Prediction leverages Facebook Prophet to predict prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user. Select a dashboard and see what ExtractAlpha can do! 
         
-        Select a dashboard and see what ExtractAlpha can do!
+        A big shoutout to [Algovibes](https://www.youtube.com/c/Algovibes/featured) and [Python Engineer](https://www.youtube.com/c/PythonEngineer). Without their videos and blog posts this project would not have be been possible, much apperciate the inspiration. Make sure you check out their excellent content!
+       
         #### Want to learn more?
         - Check out the repo [Here](https://github.com/webn3ewbie/Equity-Currencies-Cryptos-Bonds-Analyzer)
         - Connect with me on [LinkedIn](https://www.linkedin.com/in/joseph-biancamano/)
@@ -33,6 +32,8 @@ def intro():
         - Nikkei 225: ^N225
         - USD/EUR: EURUSD=X
         - CBOE Volatility Index: ^VIX
+        
+        ### Please note this app is NOT financial advice,  nor are any dashboards intended to help guide financial decisions!
     """
     )
 
@@ -56,12 +57,9 @@ def asset_return():
     import pandas as pd
     import yfinance as yf
  
-    st.title('Asset Return Analyzer')
-    
+    st.title('Asset Return Analyzer')  
     tickers = ("Tickers",'TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG', 'QQQ','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI','^N225','^VIX')
-
     dropdown = st.multiselect('Select your assests', tickers)
-
     start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
     end = st.date_input('End',value = pd.to_datetime('today'))
     
@@ -90,11 +88,8 @@ def asset_price_prediction():
              """)
     start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
     end = st.date_input('End',value = pd.to_datetime('today'))
-
     stocks = ('SPY','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','TSLA','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','^VIX','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
-
     selected_stock = st.selectbox('Select dataset for prediction', stocks)
-
     n_years = st.slider('Years of prediction:', 1, 5)
     period = n_years * 365
 
@@ -152,10 +147,7 @@ def monte_carlo():
     import statistics as stat
     import yfinance as yf
 
-    #<----------SETTING THE PAGE PARAMETERS----------->
-   
-
-    #<----------HEADING PAGE TITLE AND DESCRIPTION------------>
+  
     st.title('Monte Carlo Simulator')
     st.write("""
         The Monte Carlo is a widely used tool to solve a variety of problems ranging from numerical integration to optimization
@@ -172,7 +164,6 @@ def monte_carlo():
          2. Volatility - Utilizing historical volatility and multiplying it by a standard variable.
         Using these components we can compute the daily return of any given security. We will run a number of simulations to simulate future trading days and the impact it will have on the portfolio. 
         """)
-
     #<----------SELECTING A VALID TICKER FOR THE MONTE CARLO SIMULATION---------->
     ticker = st.text_input("Input a Ticker", value="SPY")
 
@@ -213,8 +204,8 @@ def monte_carlo():
     daily_returns = np.exp(drift.values + stdev.values * Z)
 
     #<----WILL ADD FEATURE FOR ADVANCED SETTINGS TO MANIPULATE STANDARD DEVIATION AND MEAN------>
-    # st.sidebar.subheader("Advanced Settings")
-    # newstdev = st.sidebar.number_input("Standard Deviation", value=stdev.item(), format="%.4f")
+    #st.subheader("Advanced Settings")
+    #st.number_input("Standard Deviation", value=stdev.item(), format="%.4f")
 
     #<-------CALCULATING STOCK PRICE-------->
     price_paths = np.zeros_like(daily_returns)
@@ -284,7 +275,7 @@ def equity_analysis():
 
  #ticker search feature in sidebar
  st.title("""Equity Fundamental Analysis""")
- selected_stock = st.text_input("Enter a valid stock ticker...", "GOOG")
+ selected_stock = st.text_input("Enter a valid stock ticker...", "TSLA")
 
 
  #main function
@@ -337,7 +328,7 @@ def equity_analysis():
      #checkbox to display list of institutional shareholders for searched ticker
      major_shareholders = st.checkbox("Institutional Shareholders")
      if major_shareholders:
-         st.subheader("""**Institutional investors** for """ + selected_stock)
+         st.subheader("""**Institutional shareholders** for """ + selected_stock)
          display_shareholders = (stock_data.institutional_holders)
          if display_shareholders.empty == True:
              st.write("No data available at the moment")
@@ -373,7 +364,7 @@ def equity_analysis():
              st.write("No data available at the moment")
          else:
              st.write(display_earnings)
-
+            
      #checkbox to display list of analysts recommendation for searched ticker
      analyst_recommendation = st.checkbox("Analysts Recommendation")
      if analyst_recommendation:
@@ -383,36 +374,9 @@ def equity_analysis():
              st.write("No data available at the moment")
          else:
              st.write(display_analyst_rec)
-         st.subheader("""Daily **closing price** for """ + selected_stock)
-         #get data on searched ticker
-         stock_data = yf.Ticker(selected_stock)
-         #get historical data for searched ticker
-         stock_df = stock_data.history(period='1d', start='2010-01-01', end=None)
-         #print line chart with daily closing prices for searched ticker
-         st.line_chart(stock_df.Close)
-
-         st.subheader("""Last **closing price** for """ + selected_stock)
-         #define variable today 
-         today = datetime.today().strftime('%Y-%m-%d')
-         #get current date data for searched ticker
-         stock_lastprice = stock_data.history(period='1d', start=today, end=today)
-         #get current date closing price for searched ticker
-         last_price = (stock_lastprice.Close)
-         #if market is closed on current date print that there is no data available
-         if last_price.empty == True:
-             st.write("No data available at the moment")
-         else:
-             st.write(last_price)
-         
-         #get daily volume for searched ticker
-         st.subheader("""Daily **volume** for """ + selected_stock)
-         st.line_chart(stock_df.Volume)
-
-
  if __name__ == "__main__":
      main()
-
-
+     
 
 page_names_to_funcs = {
     "Home": intro,
@@ -420,7 +384,8 @@ page_names_to_funcs = {
     "Asset Price Comparison": price_comparison,
     "Assest Price Prediction": asset_price_prediction,
     "Monte Carlo Simulation": monte_carlo,
-    "Equity Fundemental Analysis": equity_analysis
+    "Equity Fundemental Analysis": equity_analysis,
+    
 }
 
 demo_name = st.sidebar.selectbox("Choose a dashboard", page_names_to_funcs.keys())
