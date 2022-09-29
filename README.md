@@ -1,4 +1,4 @@
-<h1> <b> STREAMLIT ASSET ANALYSIS/PREDICTION APP  </h1> [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://webn3ewbie-economic-data-terminal-econterm-kzs8s4.streamlitapp.com/)
+<h1> STREAMLIT ASSET ANALYSIS/PREDICTION APP  </h1> [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://webn3ewbie-economic-data-terminal-econterm-kzs8s4.streamlitapp.com/)
 Analyze stocks, bonds, commodities, currencies, cryptos and predict asset prices using Streamlit and Facebook Prophet
 
 <h2><b> OVERVIEW </b> </h2>
