@@ -21,6 +21,7 @@ def intro():
         - Ask a question in the Streamlit community [forums](https://discuss.streamlit.io)
         #### Yahoo Finance Ticker Cheat Sheet
         - Crude Oil: CL=F 
+        - Natural Gas: NG=F
         - Gold: GC=F 
         - Silver: SI=F  
         - U.S. 5 Year Treasury Yield: ^FVX
@@ -33,35 +34,32 @@ def intro():
         - USD/EUR: EURUSD=X
         - CBOE Volatility Index: ^VIX
         
-        ### Please note this app is NOT financial advice,  nor are any dashboards intended to help guide financial decisions!
+        ### Please note this app is NOT financial advice, nor are any dashboards intended to help guide financial decisions!
     """
     )
 
 def price_comparison():
     import streamlit as st
     import yfinance as yf
-    import pandas as pd
      
     st.title('Asset Price Analyzer') 
-    start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
-    end = st.date_input('End',value = pd.to_datetime('today'))
+    start_date = st.date_input('START Date')
+    end_date = st.date_input('END Date')
     tickers = st.text_input("Tickers", "AAPL MSFT")
     tickers = tickers.split()
-    tickers_data = yf.download(tickers, period="5y", interval="1d")
+    tickers_data = yf.download(tickers, start_date, end_date)
     st.header('Prices of {}'.format(tickers))
     st.line_chart(tickers_data.Close) 
 
 def asset_return():
-
     import streamlit as st 
-    import pandas as pd
     import yfinance as yf
  
-    st.title('Asset Return Analyzer')  
-    tickers = ("Tickers",'TSLA','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','SPY','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','JPM','PG','MA','GOOG', 'QQQ','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI','^N225','^VIX')
-    dropdown = st.multiselect('Select your assests', tickers)
-    start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
-    end = st.date_input('End',value = pd.to_datetime('today'))
+    st.title('Asset Return Analyzer') 
+    start_date = st.date_input('START Date')
+    end_date = st.date_input('END Date')
+    tickers = st.text_input("Tickers","AAPL MSFT")
+    tickers = tickers.split()
     
     def relativeret(df):
         rel = df.pct_change()
@@ -69,14 +67,13 @@ def asset_return():
         cumret = cumret.fillna(0)
         return cumret
     
-    if len (dropdown) > 0:
-        df = yf.download(dropdown,start,end)['Adj Close']
-        st.header('Returns of {}'.format(dropdown))
-        df = relativeret(yf.download(dropdown, start, end)['Adj Close'])
+    if len (tickers) > 0:
+        df = yf.download(tickers,start_date,end_date)['Adj Close']
+        st.header('Returns of {}'.format(tickers))
+        df = relativeret(yf.download(tickers, start_date, end_date)['Adj Close'])
         st.line_chart(df)
  
 def asset_price_prediction():
-    import pandas as pd
     from prophet import Prophet
     from prophet.plot import plot_plotly
     from plotly import graph_objs as go
@@ -86,16 +83,16 @@ def asset_price_prediction():
              Use Facebook Prophet to predict asset prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user, therefore the start and end date selected are very import to the models accuracy. Be sure to experiment with a short time series and a long time time series to see the difference in the  prediction. Remember this is NOT financial advice!
              
              """)
-    start = st.date_input('Start', value = pd.to_datetime('2000-01-01'))
-    end = st.date_input('End',value = pd.to_datetime('today'))
-    stocks = ('SPY','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','TSLA','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','^VIX','JPM','PG','MA','GOOG','CL=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
+    start_date = st.date_input('START Date')
+    end_date = st.date_input('END Date')
+    stocks = ('SPY','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','TSLA','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','^VIX','JPM','PG','MA','GOOG','CL=F', 'NG=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
     selected_stock = st.selectbox('Select dataset for prediction', stocks)
     n_years = st.slider('Years of prediction:', 1, 5)
     period = n_years * 365
 
     @st.cache
     def load_data(ticker):
-        data = yf.download(ticker, start,end)
+        data = yf.download(ticker, start_date,end_date)
         data.reset_index(inplace=True)
         return data
  	
@@ -112,7 +109,6 @@ def asset_price_prediction():
     	st.plotly_chart(fig)
     	
     plot_raw_data()
-
     # Predict forecast with Prophet.
     df_train = data[['Date','Close']]
     df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
@@ -134,8 +130,7 @@ def asset_price_prediction():
     fig2 = m.plot_components(forecast)
     st.write(fig2)
     
-def monte_carlo():
-    
+def monte_carlo():  
     import datetime
     import matplotlib.pyplot as plt
     import numpy as np
@@ -147,7 +142,6 @@ def monte_carlo():
     import statistics as stat
     import yfinance as yf
 
-  
     st.title('Monte Carlo Simulator')
     st.write("""
         The Monte Carlo is a widely used tool to solve a variety of problems ranging from numerical integration to optimization
@@ -172,7 +166,7 @@ def monte_carlo():
     The start date is our basis for how far back we want to collect historical data to compute our volatility and drift.
     The end date will always be today's date. 
     """)
-    startDate = st.date_input("Historical Start Date", datetime.date(2010,1,1))
+    startDate = st.date_input("Historical Start Date", datetime.date(2015,1,1))
 
     #<----------SELECTING NUMBER OF DAYS WE ARE LOOKING TO FORECAST----------->
     intDays = st.number_input("Number of Future Days to Simulate", min_value=5, max_value=None, value=50) + 1
@@ -272,11 +266,9 @@ def equity_analysis():
  import yfinance as yf
  from datetime import datetime
 
-
  #ticker search feature in sidebar
  st.title("""Equity Fundamental Analysis""")
  selected_stock = st.text_input("Enter a valid stock ticker...", "TSLA")
-
 
  #main function
  def main():
@@ -377,7 +369,6 @@ def equity_analysis():
  if __name__ == "__main__":
      main()
      
-
 page_names_to_funcs = {
     "Home": intro,
     "Asset Return Comparison": asset_return,
