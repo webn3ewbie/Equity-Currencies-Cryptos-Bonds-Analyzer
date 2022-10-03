@@ -85,8 +85,8 @@ def asset_price_prediction():
              """)
     start_date = st.date_input('START Date')
     end_date = st.date_input('END Date')
-    stocks = ('SPY','AAPL','MSFT','BTC-USD','ETH-USD','LMT','AMZN','TSLA','BRK-B','META','UNH','V','NVDA','JNJ','WMT','XOM','^VIX','JPM','PG','MA','GOOG','CL=F', 'NG=F','GC=F','SI=F','^TNX','EURUSD=X','^FVX','^TYX','^RUT','^IXIC','^GSPC','^DJI')
-    selected_stock = st.selectbox('Select dataset for prediction', stocks)
+    tickers = st.text_input("Tickers","AAPL MSFT")
+    tickers = tickers.split()
     n_years = st.slider('Years of prediction:', 1, 5)
     period = n_years * 365
 
@@ -97,7 +97,7 @@ def asset_price_prediction():
         return data
  	
     data_load_state = st.text('Loading data...')
-    data = load_data(selected_stock)
+    data = load_data(tickers)
     data_load_state.text('Loading data... done!')
 
     # Plot raw data
@@ -378,6 +378,5 @@ page_names_to_funcs = {
     "Equity Fundemental Analysis": equity_analysis,
     
 }
-
 demo_name = st.sidebar.selectbox("Choose a dashboard", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
