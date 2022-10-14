@@ -366,9 +366,9 @@ def equity_analysis():
              st.write("No data available at the moment")
          else:
              st.write(display_analyst_rec)
- if __name__ == "__main__":
-     main()
-     
+ 
+if __name__ == "__main__":
+     main()    
 page_names_to_funcs = {
     "Home": intro,
     "Asset Return Comparison": asset_return,
