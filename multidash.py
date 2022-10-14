@@ -271,7 +271,7 @@ def equity_analysis():
  selected_stock = st.text_input("Enter a valid stock ticker...", "TSLA")
 
  #main function
- def main():
+ def equitya():
      st.subheader("""Daily **closing price** for """ + selected_stock)
      #get data on searched ticker
      stock_data = yf.Ticker(selected_stock)
@@ -366,9 +366,9 @@ def equity_analysis():
              st.write("No data available at the moment")
          else:
              st.write(display_analyst_rec)
- 
-if __name__ == "__main__":
-     main()    
+ if __name__ == "__equitya__":
+     equitya()
+     
 page_names_to_funcs = {
     "Home": intro,
     "Asset Return Comparison": asset_return,
