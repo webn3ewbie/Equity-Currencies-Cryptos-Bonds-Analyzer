@@ -83,19 +83,18 @@ def asset_price_prediction():
              Use Facebook Prophet to predict asset prices up to 5 years in the future. The model is trained from data of the assets daily opening and closing price based on the time period entered by the user, therefore the start and end date selected are very import to the models accuracy. Be sure to experiment with a short time series and a long time time series to see the difference in the  prediction. Remember this is NOT financial advice!
              
              """)
-    start_date = st.date_input('START Date')
-    end_date = st.date_input('END Date')
-    tickers = st.text_input("Tickers","AAPL MSFT")
-    tickers = tickers.split()
-    n_years = st.slider('Years of prediction:', 1, 5)
-    period = n_years * 365
-
     @st.cache
     def load_data(ticker):
         data = yf.download(ticker, start_date,end_date)
         data.reset_index(inplace=True)
         return data
  	
+    start_date = st.date_input('START Date')
+    end_date = st.date_input('END Date')
+    tickers = st.text_input("Tickers","AAPL MSFT")
+    tickers = tickers.split()
+    n_years = st.slider('Years of prediction:', 1, 5)
+    period = n_years * 365 
     data_load_state = st.text('Loading data...')
     data = load_data(tickers)
     data_load_state.text('Loading data... done!')
@@ -271,7 +270,7 @@ def equity_analysis():
  selected_stock = st.text_input("Enter a valid stock ticker...", "TSLA")
 
  #main function
- def equitya():
+ def main():
      st.subheader("""Daily **closing price** for """ + selected_stock)
      #get data on searched ticker
      stock_data = yf.Ticker(selected_stock)
@@ -366,8 +365,8 @@ def equity_analysis():
              st.write("No data available at the moment")
          else:
              st.write(display_analyst_rec)
- if __name__ == "__equitya__":
-     equitya()
+ if __name__ == "__main__":
+     main()
      
 page_names_to_funcs = {
     "Home": intro,
