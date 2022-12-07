@@ -18,9 +18,6 @@
 
 <br>
 
-
-<h3> App link: https://webn3ewbie-streamlit-asset-analysis-prediction-multidash-1eo8jk.streamlitapp.com/ </h3>
-
 <h3> Facebook Prophet Docs: https://facebook.github.io/prophet/docs/quick_start.html </h3>
 
 <h3> Streamlit : https://www.streamlit.io/ </h3>
