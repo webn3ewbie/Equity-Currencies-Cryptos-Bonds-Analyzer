@@ -64,7 +64,7 @@ def asset_return():
     def relativeret(df):
         rel = df.pct_change()
         cumret = (1+rel).cumprod() - 1
-        cumret = cumret.fillna(0)
+        cumret = cumret.fillna(0) * 100
         return cumret
     
     if len (tickers) > 0:
