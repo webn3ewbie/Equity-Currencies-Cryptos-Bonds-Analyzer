@@ -69,7 +69,7 @@ def asset_return():
     
     if len (tickers) > 0:
         df = yf.download(tickers,start_date,end_date)['Adj Close']
-        st.header('Returns of {}'.format(tickers))
+        st.header('% Returns of {}'.format(tickers))
         df = relativeret(yf.download(tickers, start_date, end_date)['Adj Close'])
         st.line_chart(df)
  
